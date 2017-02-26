@@ -1,0 +1,17 @@
+{
+  "name": "kitura",
+  "version": "0.0.0",
+  "description": "Kitura package for Atom",
+  "keywords": [
+    "swift",
+    "kitura",
+    "stencil"
+  ],
+  "repository": "https://github.com/tetodorov/atom-kitura.git",
+  "license": "MIT",
+  "engines": {
+    "atom": ">=1.0.0 <2.0.0"
+  },
+  "dependencies": {
+  }
+}

@@ -1,0 +1,60 @@
+".source.swift.kitura":
+  middleware:
+    prefix: "mw"
+    body: '''
+      public class ${1:MW} : RouterMiddleware {
+        
+        func handle(${1:request}: RouterRequest, ${2:response}: RouterResponse, ${3:next}: @escaping () -> Void) ${4:throws} {
+          $5
+        }
+      
+      }
+    '''
+  "Register Simple Tag":
+    prefix: "rst"
+    body: '''
+      ${1:namespace}.registerSimpleTag("$2") { context in
+        return "$3"
+      }
+    '''
+  "Register Tag":
+    prefix: "rt"
+    body: "${1:namespace}.registerTag(\"$2\", parser: ${3:${2/./\\u$0/}Node}.parse)"
+  render:
+    prefix: "ren"
+    body: "${1:response}.render(${2:\"$3\"}, context: $4)"
+  route:
+    prefix: "route"
+    body: '''
+      ${1:router}.${2|get,post,put,patch,delete,all|}("$3") {  ${4:request}, ${5:response}, ${6:next} in
+        $7
+      }
+    '''
+  server:
+    prefix: "server"
+    body: "Kitura.addHTTPServer(onPort: ${1:8090}, with: ${2:router})"
+".text.html.stencil":
+  for:
+    prefix: "for"
+    body: '''
+      {% for ${1:element} in ${1/$/$1s/} %}
+        {{$2}}
+      ${3:{% empty %\\}
+        {{$4\\}\\}}
+      {% endfor %}
+    '''
+  "if[not]":
+    prefix: "if"
+    body: '''
+      {% ${1|if,ifnot|} ${2:variable} %}
+        $3
+      ${4:{% else %\\}
+        $5}
+      {% endif %}
+    '''
+  include:
+    prefix: "inc"
+    body: "{% include \"$1\" %}"
+  var:
+    prefix: "{"
+    body: "{{ $1${2: | ${3|capitalize,uppercase,lowercase|}}}"

@@ -1,0 +1,99 @@
+fileTypes: [
+  "stencil"
+]
+name: "HTML (Stencil)"
+patterns: [
+  {
+    begin: "\\{#"
+    end: "\\}"
+    name: "comment.block.stencil"
+  }
+  {
+    include: "text.html.basic"
+  }
+  {
+    include: "#closer"
+  }
+  {
+    include: "#filter"
+  }
+  {
+    include: "#tag"
+  }
+  {
+    include: "#variable_tag"
+  }
+]
+repository:
+  closer:
+    captures:
+      "1":
+        name: "entity.name.tag.stencil"
+    match: "\\{%\\s*(else|endif|endfor|empty)\\s*%\\}"
+  filter:
+    captures:
+      "1":
+        patterns: [
+          {
+            captures:
+              "0":
+                name: "string.quoted.double.swift"
+            match: "\\\"[^\"]*\\\""
+          }
+          {
+            captures:
+              "0":
+                name: "variable.parameter.stencil"
+            match: "\\w+"
+          }
+        ]
+      "2":
+        name: "entity.name.function.stencil"
+      "4":
+        patterns: [
+          {
+            captures:
+              "0":
+                name: "string.quoted.double.swift"
+            match: "\\\"[^\"]*\\\""
+          }
+          {
+            captures:
+              "0":
+                name: "variable.parameter.stencil"
+            match: "\\w+"
+          }
+        ]
+    match: "\\{\\{\\s*([^|]+)\\|\\s*(\\w+)\\s*(:\\s*(.+))?\\}\\}"
+  tag:
+    captures:
+      "1":
+        name: "entity.name.tag.stencil"
+      "2":
+        patterns: [
+          {
+            captures:
+              "0":
+                name: "string.quoted.double.swift"
+            match: "\\\"[^\"]*\\\""
+          }
+          {
+            captures:
+              "0":
+                name: "entity.name.tag.stencil"
+            match: "in|or|and|not"
+          }
+          {
+            captures:
+              "0":
+                name: "variable.parameter.stencil"
+            match: "\\w+"
+          }
+        ]
+    match: "\\{% (\\w+)\\s+([^%]+)%\\}"
+  variable_tag:
+    captures:
+      "1":
+        name: "variable.parameter.stencil"
+    match: "\\{\\{([^\\}]+)\\}\\}"
+scopeName: "text.html.stencil"

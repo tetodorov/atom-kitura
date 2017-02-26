@@ -1,0 +1,18 @@
+fileTypes: [
+  "swift"
+]
+name: "Swift Kitura"
+patterns: [
+  {
+    match: "Kitura|Router(Request|Response)?|BodyParser|ContentType|StaticFileServer"
+    name: "support.type"
+  }
+  {
+    match: "get|post|put|patch|delete|any|run"
+    name: "support.function"
+  }
+  {
+    include: "source.swift"
+  }
+]
+scopeName: "source.swift.kitura"
