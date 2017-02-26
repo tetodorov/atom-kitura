@@ -9,6 +9,6 @@ Commands and snippets for working with [Kitura](https://github.com/IBM-Swift/Kit
 
 ### Install using APM
 ```
-$ apm install atom-kitura
+$ apm install kitura
 ```
 Files with extensions `.stencil` are recognised as Stencil templates. The tab triggers and command shortcuts for Swift source files only work if the file type is set to `Swift Kitura`.
